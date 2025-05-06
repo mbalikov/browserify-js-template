@@ -5,7 +5,7 @@ Simple transform for Browserify that wraps (html) files into JS modules
 
 ## Install
 
-    npm install browserify-js-templates
+    npm install browserify-js-template
 
 ## Example
 template.html:
