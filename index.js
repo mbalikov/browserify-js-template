@@ -1,48 +1,30 @@
-var through = require('through');
-var htmlclean = require('htmlclean');
+const through2 = require('through2');
 
-module.exports = function(file, options) {
+module.exports = function(file, options = {}) {
+    const extensions = options.extensions || '.html';
 
-	options = options || {};
-	options.htmlclean = typeof options.htmlclean !== 'undefined'? options.htmlclean : true;
-	
-	var buffer = '';
+    let shouldProcess = false;
+    if (typeof extensions === 'string') {
+        shouldProcess = file.endsWith(extensions)
+    } else {
+        shouldProcess = extensions.some(ext => file.endsWith(ext));
+    }
+    if (!shouldProcess)
+        return through2();
 
-	if (!/\.(tpl|html)/.test(file)) {
-		
-		return through();
-		
-	} else {
-		
-		return through(function(chunk) {
+    let buffer = '';
+    return through2(function(chunk, enc, next) {
+        buffer += chunk.toString();
+        next()
+    }, function(done) {
+        let data = buffer.toString()
+            .replace(/`/g, '\\`');
 
-			return buffer += chunk.toString();
-
-		}, function() {
-			
-			var jst = buffer.toString();
-				
-			if (options.htmlclean) {
-				//options.htmlclean is truthy
-				
-				if (typeof options.htmlclean === 'object') {
-					//options.htmlclean is an options object for the htmlclean module
-					jst = htmlclean(jst, options.htmlclean);
-				} else {
-					//otherwise, clean using default options
-					jst = htmlclean(jst);
-				}
-			}
-
-			var compiled = 'module.exports = ';
-			compiled += JSON.stringify(jst);
-			compiled += ';\n';
-			
-			this.queue(compiled);
-			return this.queue(null);
-
-		});
-
-	}
-	
+        const output = 
+`module.exports = function(args = {}) { 
+    return \`${data}\`; 
+}`;
+        this.push(output);
+        done();
+    });
 }

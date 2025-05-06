@@ -1,43 +1,35 @@
 {
-  "name": "html-browserify",
-  "version": "0.0.6",
-  "description": "Makes HTML files usuable as modules in Browserify",
+  "name": "browserify-js-template",
+  "version": "0.0.1",
+  "description": "Browserify plugin - wraps (HTML) templates into JS modules",
   "main": "index.js",
-  "scripts": {
-    "test": "mocha -u exports -R spec test/index"
-  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/duckbox/html-browserify"
+    "url": "https://github.com/mbalikov/browserify-js-template/"
   },
   "author": {
-    "name": "Chris Grant",
-    "email": "duckbox38@gmail.com",
-    "url": "http://duckbox.net"
+    "name": "Mihail Balikov",
+    "url": "https://github.com/mbalikov/"
   },
   "bugs": {
-    "url": "https://github.com/duckbox/html-browserify/issues"
+    "url": "https://github.com/mbalikov/browserify-js-template/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/duckbox/html-browserify.git/blob/master/LICENSE-MIT"
+      "url": "https://github.com/duckbox/browserify-js-template.git/blob/master/LICENSE-MIT"
     }
   ],
   "keywords": [
     "browserify",
     "html",
-    "v2",
+    "template",
     "js",
     "plugin",
     "transform",
     "browserify-transform"
   ],
   "dependencies": {
-    "htmlclean": "^2.6.3",
-    "through": "^2.3.6"
-  },
-  "devDependencies": {
-    "chai": "^2.2.0"
+    "through2": "latest"
   }
 }

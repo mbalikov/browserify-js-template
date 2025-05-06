@@ -1,31 +1,29 @@
-html-browserify
+browserify-js-templates
 ===============
 
-[![Build Status](https://travis-ci.org/duckbox/html-browserify.png?branch=master)](https://travis-ci.org/duckbox/html-browserify)
-
-
-Simple HTML transform for Browserify
+Simple transform for Browserify that wraps (html) files into JS modules
 
 ## Install
 
-	npm install html-browserify
+    npm install browserify-js-templates
 
-## Usage with Gulp
+## Example
+template.html:
+```html
 
-```javascript
-
-//...
-var html = require('html-browserify');
-//...
-
-gulp.task('js', function() {
-  gulp.src('js/app.js')
-    .pipe(browserify({
-      insertGlobals: true,
-      transform: html
-    }))
-    .pipe(concat('app.js'))
-    .pipe(gulp.dest('./public/js'));
-});
+<div>
+  <h1>Hello, <strong>${args.name}</strong></h1>
+</div>
 ```
 
+main.js:
+```javascript
+
+const template = require('./template.html');
+console.log(template({ name: "World" }));
+```
+
+Create bundle
+```
+browserify ./main.js -t browserify-js-template -o ./bundle.js
+```
