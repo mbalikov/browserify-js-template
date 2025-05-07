@@ -2,6 +2,7 @@ const through2 = require('through2');
 
 module.exports = function(file, options = {}) {
     const extensions = options.extensions || '.html';
+    const dont_escape_backtick = options.dont_escape_backtick || false;
 
     let shouldProcess = false;
     if (typeof extensions === 'string') {
@@ -17,8 +18,9 @@ module.exports = function(file, options = {}) {
         buffer += chunk.toString();
         next()
     }, function(done) {
-        let data = buffer.toString()
-            .replace(/`/g, '\\`');
+        let data = buffer.toString();
+        if (!dont_escape_backtick)
+            data = data.replace(/`/g, '\\`');
 
         const output = 
 `module.exports = function(args = {}) { 

@@ -2,7 +2,10 @@ browserify-js-templates
 ===============
 
 Simple transform for Browserify that wraps (html) files into JS modules.
-Default template file extension is .html
+
+Options:  
+--extensions (default .html)  
+--dont_escape_backtick (default is to escape backtick)
 
 ## Install
 
@@ -26,6 +29,6 @@ console.log(template({ name: "World" }));
 
 Create bundle
 ```
-browserify ./main.js -t [ browserify-js-template --extensions .html ] -o ./bundle.js
+browserify ./main.js -t [ browserify-js-template --extensions .html --dont_escape_backtick ] -o ./bundle.js
 ```
 

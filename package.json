@@ -1,6 +1,6 @@
 {
   "name": "browserify-js-template",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Browserify plugin - wraps (HTML) templates into JS modules",
   "main": "index.js",
   "repository": {
